@@ -1,0 +1,36 @@
+<!--
+  Generated template for the FirePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Incidencia de incendio</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding style="background-color: #2e2e30;">
+  <ion-card>
+    <ion-item>
+      <ion-input type="text" placeholder="Description"></ion-input>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      Location
+      <ion-icon name="pin" item-end></ion-icon>
+    </ion-item>
+  </ion-card>
+    <img [src]="image" *ngIf="image" />
+    <button *ngIf="!image" block (click)="getPicture()" ion-button>
+      <ion-icon name="camera" item-center></ion-icon>
+    </button>
+  <button style="width: 100%; background-color: #962c0c" ion-button>
+    <ion-icon name="flame" item-end></ion-icon>FIRE!!<ion-icon name="flame" item-end></ion-icon>
+  </button>
+
+</ion-content>
