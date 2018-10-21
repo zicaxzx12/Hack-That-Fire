@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 declare var google: any;
 /*
@@ -13,9 +14,10 @@ declare var google: any;
 export class ApisProvider {
   apiurl = "http://api.openweathermap.org/data/2.5/weather?APPID=91133df127c96d761d618924474da2ac&q=";
   private noteListRef = this.db.list<any>('notices');
+  ImagesRef:any;
 
 // private db: AngularFireDatabase,
-  constructor(private db: AngularFireDatabase, public http: HttpClient) {
+constructor(private afStorage: AngularFireStorage, private db: AngularFireDatabase, public http: HttpClient) {
     console.log('Hello ApisProvider Provider');
   }
 
@@ -45,6 +47,17 @@ export class ApisProvider {
 
   removeNotice(data) {
     return this.noteListRef.remove(data.key);
+  }
+
+  get_city(lat, long) {
+    return this.http.get("http://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat.toFixed(2) + "," + long.toFixed(2));
+  }
+
+  up_image(name, base64){
+    this.ImagesRef = this.afStorage.storage.ref();
+    this.ImagesRef.child(`notices/${name}.jpg`).putString(base64, 'base64').then(function (snapshot) {
+      console.log('Uploaded a base64 string!');
+    });
   }
 
   }

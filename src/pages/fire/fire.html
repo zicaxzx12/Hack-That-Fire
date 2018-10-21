@@ -15,12 +15,12 @@
 <ion-content padding style="background-color: #2e2e30;">
   <ion-card>
     <ion-item>
-      <ion-input type="text" placeholder="Description"></ion-input>
+      <ion-input [(ngModel)]="FIRE.description" type="text" placeholder="Description"></ion-input>
     </ion-item>
   </ion-card>
   <ion-card>
     <ion-item>
-      {{cordinates.lat}}, {{cordinates.long}}
+      {{cordinates.lat|number:'1.1-2'}}, {{cordinates.long|number:'1.1-2'}}
       <ion-icon name="pin" item-end></ion-icon>
     </ion-item>
   </ion-card>
@@ -28,7 +28,7 @@
     <button *ngIf="!image" block (click)="getPicture()" ion-button>
       <ion-icon name="camera" item-center></ion-icon>
     </button>
-  <button style="width: 100%; background-color: #962c0c" ion-button>
+  <button (click)="send_fire()" style="width: 100%; background-color: #962c0c" ion-button>
     <ion-icon name="flame" item-end></ion-icon>FIRE!!<ion-icon name="flame" item-end></ion-icon>
   </button>
 
