@@ -26,7 +26,7 @@ export class NewsPage {
 
   ionViewDidLoad() {
 
-    this.api.getNoticeList().snapshotChanges().map(val => console.log(val.values));
+    this.api.getNoticeList().valueChanges();//.subscribe((datas) => { console.log("datas", datas) }, (err) => { console.log("probleme : ", err) });
  
   }
 

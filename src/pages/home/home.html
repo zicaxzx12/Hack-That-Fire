@@ -4,15 +4,23 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding style="background-color: #2b3042;">
+<ion-content style="background-color: #2b3042;">
 
-  
-  
-  <ion-content>
+  <ion-content style="background-color: #2b3042;">
     <ion-item class="map" id="map"></ion-item>
-    <ion-item style="color:wheat;">
-      {{ weather_response|number:'1.1-2' }}ºC
+    <ion-item style="color:#b1770a">
+      <h2 style="color: #991111"><strong>Temperatura de mochis</strong></h2>
+      <strong><ion-icon name="sunny"></ion-icon>  {{ weather_response|number:'1.1-2' }}ºC</strong>
     </ion-item>
+    <ion-item style="color:#b1770a">
+      <h2 style="color: #991111"><strong>Temperatura minima</strong></h2>
+      <strong>{{ pressure|number:'1.1-2' }}ºC</strong>
+    </ion-item>
+    <ion-item style="color:#b1770a">
+      <h2 style="color: #991111"><strong>Temperatura maxima</strong></h2>
+      <strong>{{ humedad|number:'1.1-2' }}ºC</strong>
+    </ion-item>
+    
   </ion-content>
   
   <!-- 

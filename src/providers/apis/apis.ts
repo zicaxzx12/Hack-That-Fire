@@ -13,7 +13,7 @@ declare var google: any;
 @Injectable()
 export class ApisProvider {
   apiurl = "http://api.openweathermap.org/data/2.5/weather?APPID=91133df127c96d761d618924474da2ac&q=";
-  private noteListRef = this.db.list<any>('notices');
+  private noteListRef = this.db.list<any>('notices')
   ImagesRef:any;
 
 // private db: AngularFireDatabase,

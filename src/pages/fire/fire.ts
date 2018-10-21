@@ -21,7 +21,7 @@ export class FirePage {
 
   image: string = null;
   public cordinates={lat:null, long:null};
-  public FIRE:any={image:"", city:"", description:"", user:"", status:true};
+  public FIRE:any={image:"", city:"", lat:null, long:null, description:"", user:"", status:true};
 
   constructor(public api:ApisProvider, public toastCtrl: ToastController, private geolocation: Geolocation, private camera: Camera, public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -57,9 +57,14 @@ export class FirePage {
       message: 'Noticia enviada con exito',
       duration: 3000
     });
-
+    
     this.FIRE.user = "zicaxzx@gmail.com";
-    this.api.up_image(Math.random().toString(36).substring(2), this.FIRE.image);
+    let img_name = Math.random().toString(36).substring(2);
+    this.api.up_image(img_name, this.FIRE.image);
+    this.FIRE.image = `${img_name}.jpg`;
+    this.FIRE.lat = this.cordinates.lat;
+    this.FIRE.long = this.cordinates.long;
+    console.log(this.FIRE.description);
 
     this.api.addNotice(this.FIRE).then(val => {
       toast.present();
