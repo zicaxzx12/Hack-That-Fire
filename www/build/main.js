@@ -8,6 +8,7 @@ webpackJsonp([5],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(396);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,6 +21,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
  * Generated class for the FirePage page.
  *
@@ -27,14 +29,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var FirePage = /** @class */ (function () {
-    function FirePage(camera, navCtrl, navParams) {
+    function FirePage(geolocation, camera, navCtrl, navParams) {
+        this.geolocation = geolocation;
         this.camera = camera;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.image = null;
+        this.cordinates = { lat: null, long: null };
     }
     FirePage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad FirePage');
+        var _this = this;
+        this.geolocation.getCurrentPosition().then(function (resp) {
+            _this.cordinates.lat = resp.coords.latitude;
+            _this.cordinates.long = resp.coords.longitude;
+        }).catch(function (error) {
+            console.log('Error getting location', error);
+        });
     };
     FirePage.prototype.getPicture = function () {
         var _this = this;
@@ -54,11 +64,12 @@ var FirePage = /** @class */ (function () {
     };
     FirePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-fire',template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/pages/fire/fire.html"*/'<!--\n  Generated template for the FirePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Incidencia de incendio</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding style="background-color: #2e2e30;">\n  <ion-card>\n    <ion-item>\n      <ion-input type="text" placeholder="Description"></ion-input>\n    </ion-item>\n  </ion-card>\n  <ion-card>\n    <ion-item>\n      Location\n      <ion-icon name="pin" item-end></ion-icon>\n    </ion-item>\n  </ion-card>\n    <img [src]="image" *ngIf="image" />\n    <button *ngIf="!image" block (click)="getPicture()" ion-button>\n      <ion-icon name="camera" item-center></ion-icon>\n    </button>\n  <button style="width: 100%; background-color: #962c0c" ion-button>\n    <ion-icon name="flame" item-end></ion-icon>FIRE!!<ion-icon name="flame" item-end></ion-icon>\n  </button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/pages/fire/fire.html"*/,
+            selector: 'page-fire',template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/pages/fire/fire.html"*/'<!--\n  Generated template for the FirePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Incidencia de incendio</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding style="background-color: #2e2e30;">\n  <ion-card>\n    <ion-item>\n      <ion-input type="text" placeholder="Description"></ion-input>\n    </ion-item>\n  </ion-card>\n  <ion-card>\n    <ion-item>\n      {{cordinates.lat}}, {{cordinates.long}}\n      <ion-icon name="pin" item-end></ion-icon>\n    </ion-item>\n  </ion-card>\n    <img [src]="image" *ngIf="image" />\n    <button *ngIf="!image" block (click)="getPicture()" ion-button>\n      <ion-icon name="camera" item-center></ion-icon>\n    </button>\n  <button style="width: 100%; background-color: #962c0c" ion-button>\n    <ion-icon name="flame" item-end></ion-icon>FIRE!!<ion-icon name="flame" item-end></ion-icon>\n  </button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/pages/fire/fire.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__["a" /* Camera */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__["a" /* Camera */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _d || Object])
     ], FirePage);
     return FirePage;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=fire.js.map
@@ -69,71 +80,10 @@ var FirePage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewsPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__notice_notice__ = __webpack_require__(159);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_apis_apis__ = __webpack_require__(76);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-/**
- * Generated class for the NewsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var NewsPage = /** @class */ (function () {
-    function NewsPage(api, navCtrl, navParams) {
-        this.api = api;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.rootPage = __WEBPACK_IMPORTED_MODULE_2__notice_notice__["a" /* NoticePage */];
-    }
-    NewsPage.prototype.ionViewDidLoad = function () {
-        // this.notices = this.api.getNoticeList().snapshotChanges()
-        //   .map(
-        //     changes => {
-        //       return changes.map(c => ({
-        //         key: c.payload['key'], ...c.payload.val()
-        //       }))
-        //     });
-        // console.log('ionViewDidLoad NewsPage');
-    };
-    NewsPage.prototype.see_new = function () {
-        this.navCtrl.push(this.rootPage);
-    };
-    NewsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-news',template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/pages/news/news.html"*/'<!--\n  Generated template for the NewsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>news</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content style="background-color: #2b3042;">\n  \n  <ion-list>\n    <ion-item *ngFor="let note of notices | async" style="background-color: #a83939; color:rgb(240, 238, 238)">\n      <ion-thumbnail item-start>\n        <img src="assets/imgs/incendio.jpg">\n      </ion-thumbnail>\n      <h2>{{note.city}}</h2>\n      <p style="color: wheat">{{note.description}}</p>\n      <button (click)="see_new()" ion-button clear item-end>View</button>\n    </ion-item>\n    <ion-item style="background-color: #a83939; color:rgb(240, 238, 238)">\n      <ion-thumbnail item-start>\n        <img src="assets/imgs/incendio.jpg">\n      </ion-thumbnail>\n      <h2>Tijuana</h2>\n      <p style="color: wheat">se esta incendiando la basura</p>\n      <button (click)="see_new()" ion-button clear item-end>View</button>\n    </ion-item>\n    <ion-item style="background-color: #a83939; color:rgb(240, 238, 238)">\n      <ion-thumbnail item-start>\n        <img src="assets/imgs/incendio.jpg">\n      </ion-thumbnail>\n      <h2>Tijuana</h2>\n      <p style="color: wheat">se esta incendiando la basura</p>\n      <button (click)="see_new()" ion-button clear item-end>View</button>\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/pages/news/news.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_apis_apis__["a" /* ApisProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
-    ], NewsPage);
-    return NewsPage;
-}());
-
-//# sourceMappingURL=news.js.map
-
-/***/ }),
-
-/***/ 159:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NoticePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_apis_apis__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_apis_apis__ = __webpack_require__(77);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -163,7 +113,7 @@ var NoticePage = /** @class */ (function () {
     };
     NoticePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-notice',template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/pages/notice/notice.html"*/'<!--\n  Generated template for the NoticePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>notice</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content style="background-color: #2b3042;">\n  <ion-item><img src="assets/imgs/incendio.jpg"></ion-item>\n  <ion-item style="background-color: #a83939; color:rgb(240, 238, 238)">\n    <ion-thumbnail item-start>\n      <img src="assets/imgs/incendio.jpg">\n    </ion-thumbnail>\n    <h2>Tijuana<ion-icon name="pin" item-end></ion-icon></h2>\n    <p style="color: wheat">se esta incendiando la basura</p>\n  </ion-item>\n  <ion-item class="map" id="map2"></ion-item>\n</ion-content>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/pages/notice/notice.html"*/,
+            selector: 'page-notice',template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/pages/notice/notice.html"*/'<!--\n  Generated template for the NoticePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>notice</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content style="background-color: #2b3042;">\n  <ion-item><img src="assets/imgs/incendio.jpg"></ion-item>\n  <ion-item style="background-color: #a83939; color:rgb(240, 238, 238)">\n    <ion-thumbnail item-start>\n      <img src="assets/imgs/incendio.jpg">\n    </ion-thumbnail>\n    <h2>Tijuana<ion-icon name="pin" item-end></ion-icon></h2>\n    <p style="color: wheat">se esta incendiando la basura</p>\n  </ion-item>\n  <ion-item class="map" id="map2"></ion-item>\n</ion-content>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/pages/notice/notice.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_apis_apis__["a" /* ApisProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
     ], NoticePage);
@@ -174,7 +124,7 @@ var NoticePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 160:
+/***/ 159:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -208,7 +158,7 @@ var PerfilPage = /** @class */ (function () {
     };
     PerfilPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-perfil',template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/pages/perfil/perfil.html"*/'<!--\n  Generated template for the PerfilPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>perfil</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding style="background-color: #2b3042;">\n\n</ion-content>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/pages/perfil/perfil.html"*/,
+            selector: 'page-perfil',template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/pages/perfil/perfil.html"*/'<!--\n  Generated template for the PerfilPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>perfil</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding style="background-color: #2b3042;">\n\n</ion-content>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/pages/perfil/perfil.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
     ], PerfilPage);
@@ -216,6 +166,60 @@ var PerfilPage = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=perfil.js.map
+
+/***/ }),
+
+/***/ 160:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__notice_notice__ = __webpack_require__(158);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_apis_apis__ = __webpack_require__(77);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+/**
+ * Generated class for the NewsPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var NewsPage = /** @class */ (function () {
+    function NewsPage(api, navCtrl, navParams) {
+        this.api = api;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_2__notice_notice__["a" /* NoticePage */];
+    }
+    NewsPage.prototype.ionViewDidLoad = function () {
+        this.api.getNoticeList().snapshotChanges().map(function (val) { return console.log(val.values); });
+    };
+    NewsPage.prototype.see_new = function () {
+        this.navCtrl.push(this.rootPage);
+    };
+    NewsPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-news',template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/pages/news/news.html"*/'<!--\n  Generated template for the NewsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>news</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content style="background-color: #2b3042;">\n  \n  <ion-list>\n\n    <ion-item *ngFor="let note of notices | async" style="background-color: #a83939; color:rgb(240, 238, 238)">\n      <ion-thumbnail item-start>\n        <img src="assets/imgs/incendio.jpg">\n      </ion-thumbnail>\n      <h2>{{note.city}}</h2>\n      <p style="color: wheat">{{note.description}}</p>\n      <button (click)="see_new()" ion-button clear item-end>View</button>\n    </ion-item>\n    \n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/pages/news/news.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_apis_apis__["a" /* ApisProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
+    ], NewsPage);
+    return NewsPage;
+}());
+
+//# sourceMappingURL=news.js.map
 
 /***/ }),
 
@@ -241,15 +245,15 @@ webpackEmptyAsyncContext.id = 171;
 
 var map = {
 	"../pages/camera/camera.module": [
-		711,
+		712,
 		0
 	],
 	"../pages/fire/fire.module": [
-		712,
+		713,
 		4
 	],
 	"../pages/news/news.module": [
-		713,
+		716,
 		3
 	],
 	"../pages/notice/notice.module": [
@@ -277,16 +281,16 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 264:
+/***/ 364:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_home__ = __webpack_require__(265);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_home__ = __webpack_require__(365);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fire_fire__ = __webpack_require__(157);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__news_news__ = __webpack_require__(158);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__perfil_perfil__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__news_news__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__perfil_perfil__ = __webpack_require__(159);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -309,7 +313,7 @@ var TabsPage = /** @class */ (function () {
         this.tab4Root = __WEBPACK_IMPORTED_MODULE_4__perfil_perfil__["a" /* PerfilPage */];
     }
     TabsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/pages/tabs/tabs.html"*/'<ion-tabs style="background-color: red;">\n  <ion-tab class="home" [root]="tab1Root" tabTitle="Home" tabIcon="home"></ion-tab>\n  <ion-tab class="fire" [root]="tab2Root" tabTitle="Fire!" tabIcon="flame"></ion-tab>\n  <ion-tab class="news" [root]="tab3Root" tabTitle="News" tabIcon="list"></ion-tab>\n  <ion-tab class="perfil" [root]="tab4Root" tabTitle="Perfil" tabIcon="person"></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/pages/tabs/tabs.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/pages/tabs/tabs.html"*/'<ion-tabs style="background-color: red;">\n  <ion-tab class="home" [root]="tab1Root" tabTitle="Home" tabIcon="home"></ion-tab>\n  <ion-tab class="fire" [root]="tab2Root" tabTitle="Fire!" tabIcon="flame"></ion-tab>\n  <ion-tab class="news" [root]="tab3Root" tabTitle="News" tabIcon="list"></ion-tab>\n  <!-- <ion-tab class="perfil" [root]="tab4Root" tabTitle="Perfil" tabIcon="person"></ion-tab> -->\n</ion-tabs>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/pages/tabs/tabs.html"*/
         }),
         __metadata("design:paramtypes", [])
     ], TabsPage);
@@ -320,14 +324,14 @@ var TabsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 265:
+/***/ 365:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_apis_apis__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_apis_apis__ = __webpack_require__(77);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -350,7 +354,7 @@ var HomePage = /** @class */ (function () {
     }
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>HTF Hack the fire</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding style="background-color: #2b3042;">\n\n  \n  \n  <ion-content>\n    <ion-item class="map" id="map"></ion-item>\n    <ion-item style="color:wheat;">\n      {{ weather_response|number:\'1.1-2\' }}ºC\n    </ion-item>\n  </ion-content>\n  \n  <!-- \n  \n    <img src="assets/imgs/map.png">\n    <ion-fab right top>\n      <button ion-fab>\n        <ion-icon name="pin"></ion-icon>\n      </button> \n    </ion-fab>\n  \n     <ion-item>\n      <ion-icon name="football" item-start large></ion-icon>\n      <h2>Museum of Fotball</h2>\n      <p>11 N. Way St, Madison, WI 53703</p>\n    </ion-item>\n  \n    <ion-item>\n      <ion-icon name="wine" item-start large></ion-icon>\n      <h2>Institute of Fine Cocktails</h2>\n      <p>14 S. Hop Avenue, Madison, WI 53703</p>\n    </ion-item>\n  \n    <ion-item>\n      <span item-start>18 min</span>\n      <span item-start>(2.6 mi)</span>\n      <button ion-button icon-start clear item-end>\n        <ion-icon name="navigate"></ion-icon>\n        Start\n      </button>\n    </ion-item> \n  \n  </ion-card>\n  <ion-grid style="bottom:0px;">\n    <ion-row>\n      <ion-col col-6>\n        <ion-card center>\n          <ion-grid style="background-color:#372a5796; border: solid; border-color: #68281d">\n            <ion-row style="text-align:center;">\n              <ion-col col-12>\n                <ion-icon name="car" style="zoom:2" center large></ion-icon>\n              </ion-col>\n              <ion-col col-12>Traffic</ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-card>\n      </ion-col>\n      <ion-col col-6>\n        <ion-card>\n          <ion-grid style="background-color:#372a5796">\n            <ion-row style="text-align:center;">\n              <ion-col col-12>\n                <ion-icon name="cloud" style="zoom:2" center large></ion-icon>\n              </ion-col>\n              <ion-col col-12>Weather</ion-col>\n            </ion-row>\n          </ion-grid>\n          \n        </ion-card>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  <ion-card>\n\n  </ion-card> -->\n</ion-content>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>HTF Hack the fire</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding style="background-color: #2b3042;">\n\n  \n  \n  <ion-content>\n    <ion-item class="map" id="map"></ion-item>\n    <ion-item style="color:wheat;">\n      {{ weather_response|number:\'1.1-2\' }}ºC\n    </ion-item>\n  </ion-content>\n  \n  <!-- \n  \n    <img src="assets/imgs/map.png">\n    <ion-fab right top>\n      <button ion-fab>\n        <ion-icon name="pin"></ion-icon>\n      </button> \n    </ion-fab>\n  \n     <ion-item>\n      <ion-icon name="football" item-start large></ion-icon>\n      <h2>Museum of Fotball</h2>\n      <p>11 N. Way St, Madison, WI 53703</p>\n    </ion-item>\n  \n    <ion-item>\n      <ion-icon name="wine" item-start large></ion-icon>\n      <h2>Institute of Fine Cocktails</h2>\n      <p>14 S. Hop Avenue, Madison, WI 53703</p>\n    </ion-item>\n  \n    <ion-item>\n      <span item-start>18 min</span>\n      <span item-start>(2.6 mi)</span>\n      <button ion-button icon-start clear item-end>\n        <ion-icon name="navigate"></ion-icon>\n        Start\n      </button>\n    </ion-item> \n  \n  </ion-card>\n  <ion-grid style="bottom:0px;">\n    <ion-row>\n      <ion-col col-6>\n        <ion-card center>\n          <ion-grid style="background-color:#372a5796; border: solid; border-color: #68281d">\n            <ion-row style="text-align:center;">\n              <ion-col col-12>\n                <ion-icon name="car" style="zoom:2" center large></ion-icon>\n              </ion-col>\n              <ion-col col-12>Traffic</ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-card>\n      </ion-col>\n      <ion-col col-6>\n        <ion-card>\n          <ion-grid style="background-color:#372a5796">\n            <ion-row style="text-align:center;">\n              <ion-col col-12>\n                <ion-icon name="cloud" style="zoom:2" center large></ion-icon>\n              </ion-col>\n              <ion-col col-12>Weather</ion-col>\n            </ion-row>\n          </ion-grid>\n          \n        </ion-card>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  <ion-card>\n\n  </ion-card> -->\n</ion-content>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_apis_apis__["a" /* ApisProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]])
     ], HomePage);
@@ -361,13 +365,13 @@ var HomePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 365:
+/***/ 366:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(366);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(370);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(367);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(371);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -375,7 +379,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 370:
+/***/ 371:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -383,30 +387,32 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(412);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_about_about__ = __webpack_require__(413);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__ = __webpack_require__(414);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(265);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__ = __webpack_require__(264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(708);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_about_about__ = __webpack_require__(709);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__ = __webpack_require__(710);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(365);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__ = __webpack_require__(364);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_fire_fire__ = __webpack_require__(157);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_news_news__ = __webpack_require__(158);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_perfil_perfil__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_notice_notice__ = __webpack_require__(159);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_status_bar__ = __webpack_require__(262);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_splash_screen__ = __webpack_require__(263);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_apis_apis__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_news_news__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_perfil_perfil__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_notice_notice__ = __webpack_require__(158);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_status_bar__ = __webpack_require__(362);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_splash_screen__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_apis_apis__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__angular_common_http__ = __webpack_require__(220);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_camera__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angularfire2__ = __webpack_require__(415);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angularfire2__ = __webpack_require__(711);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17_angularfire2__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_angularfire2_database__ = __webpack_require__(700);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_angularfire2_database__ = __webpack_require__(223);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18_angularfire2_database__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_geolocation__ = __webpack_require__(396);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -457,9 +463,9 @@ var AppModule = /** @class */ (function () {
                     links: [
                         { loadChildren: '../pages/camera/camera.module#CameraPageModule', name: 'CameraPage', segment: 'camera', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/fire/fire.module#FirePageModule', name: 'FirePage', segment: 'fire', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/news/news.module#NewsPageModule', name: 'NewsPage', segment: 'news', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/notice/notice.module#NoticePageModule', name: 'NoticePage', segment: 'notice', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/perfil/perfil.module#PerfilPageModule', name: 'PerfilPage', segment: 'perfil', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/perfil/perfil.module#PerfilPageModule', name: 'PerfilPage', segment: 'perfil', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/news/news.module#NewsPageModule', name: 'NewsPage', segment: 'news', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_17_angularfire2__["AngularFireModule"].initializeApp(FIREBASE_CONFIG),
@@ -481,6 +487,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_12__ionic_native_status_bar__["a" /* StatusBar */],
                 __WEBPACK_IMPORTED_MODULE_13__ionic_native_splash_screen__["a" /* SplashScreen */],
                 __WEBPACK_IMPORTED_MODULE_16__ionic_native_camera__["a" /* Camera */],
+                __WEBPACK_IMPORTED_MODULE_19__ionic_native_geolocation__["a" /* Geolocation */],
                 { provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicErrorHandler */] },
                 __WEBPACK_IMPORTED_MODULE_14__providers_apis_apis__["a" /* ApisProvider */]
             ]
@@ -493,16 +500,16 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 412:
+/***/ 708:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(262);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(263);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_tabs_tabs__ = __webpack_require__(264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(362);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_tabs_tabs__ = __webpack_require__(364);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -528,7 +535,7 @@ var MyApp = /** @class */ (function () {
         });
     }
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/app/app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
@@ -539,7 +546,7 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 413:
+/***/ 709:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -563,7 +570,7 @@ var AboutPage = /** @class */ (function () {
     }
     AboutPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-about',template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/pages/about/about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      About\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/pages/about/about.html"*/
+            selector: 'page-about',template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/pages/about/about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      About\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/pages/about/about.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]])
     ], AboutPage);
@@ -574,7 +581,7 @@ var AboutPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 414:
+/***/ 710:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -598,7 +605,7 @@ var ContactPage = /** @class */ (function () {
     }
     ContactPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contact',template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/pages/contact/contact.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Contact\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-list-header>Follow us on Twitter</ion-list-header>\n    <ion-item>\n      <ion-icon name="ionic" item-start></ion-icon>\n      @ionicframework\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/hackaton/src/pages/contact/contact.html"*/
+            selector: 'page-contact',template:/*ion-inline-start:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/pages/contact/contact.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Contact\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-list-header>Follow us on Twitter</ion-list-header>\n    <ion-item>\n      <ion-icon name="ionic" item-start></ion-icon>\n      @ionicframework\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/zicaxzx/portafolio/Hack-That-Fire/src/pages/contact/contact.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]])
     ], ContactPage);
@@ -609,13 +616,15 @@ var ContactPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 76:
+/***/ 77:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ApisProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(220);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -627,6 +636,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 /*
   Generated class for the ApisProvider provider.
 
@@ -634,11 +644,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
   and Angular DI.
 */
 var ApisProvider = /** @class */ (function () {
-    // private noteListRef = this.db.list<any>('notices');
     // private db: AngularFireDatabase,
-    function ApisProvider(http) {
+    function ApisProvider(db, http) {
+        this.db = db;
         this.http = http;
         this.apiurl = "http://api.openweathermap.org/data/2.5/weather?APPID=91133df127c96d761d618924474da2ac&q=";
+        this.noteListRef = this.db.list('notices');
         console.log('Hello ApisProvider Provider');
     }
     ApisProvider.prototype.get_wheater = function (data) {
@@ -651,9 +662,21 @@ var ApisProvider = /** @class */ (function () {
         };
         var map2 = new google.maps.Map(document.getElementById(id), mapOptions);
     };
+    ApisProvider.prototype.getNoticeList = function () {
+        return this.noteListRef;
+    };
+    ApisProvider.prototype.addNotice = function (data) {
+        return this.noteListRef.push(data);
+    };
+    ApisProvider.prototype.updateNotice = function (data) {
+        return this.noteListRef.update(data.key, data);
+    };
+    ApisProvider.prototype.removeNotice = function (data) {
+        return this.noteListRef.remove(data.key);
+    };
     ApisProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"], __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
     ], ApisProvider);
     return ApisProvider;
 }());
@@ -662,5 +685,5 @@ var ApisProvider = /** @class */ (function () {
 
 /***/ })
 
-},[365]);
+},[366]);
 //# sourceMappingURL=main.js.map

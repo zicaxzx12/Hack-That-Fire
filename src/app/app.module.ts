@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Camera } from '@ionic-native/camera';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { Geolocation } from '@ionic-native/geolocation';
 
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyDynmE3QxbH_Qeq4IRZKURrYUdWLhYF1dc",
@@ -66,6 +67,7 @@ const FIREBASE_CONFIG = {
     StatusBar,
     SplashScreen,
     Camera,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApisProvider
   ]

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-
+import { Geolocation } from '@ionic-native/geolocation';
 /**
  * Generated class for the FirePage page.
  *
@@ -16,12 +16,17 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 export class FirePage {
   image: string = null;
-
-  constructor(private camera: Camera, public navCtrl: NavController, public navParams: NavParams) {
+  public cordinates={lat:null, long:null};
+  constructor(private geolocation: Geolocation, private camera: Camera, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FirePage');
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.cordinates.lat = resp.coords.latitude;
+      this.cordinates.long = resp.coords.longitude;
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
   }
 
   getPicture() {

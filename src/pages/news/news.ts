@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { NoticePage } from '../notice/notice';
 import { ApisProvider } from '../../providers/apis/apis';
 import { Observable } from 'rxjs/Observable';
+
 /**
  * Generated class for the NewsPage page.
  *
@@ -20,18 +21,13 @@ import { Observable } from 'rxjs/Observable';
 export class NewsPage {
   notices: Observable<any[]>;
   rootPage = NoticePage;
-  constructor(private api:ApisProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor( private api:ApisProvider, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    // this.notices = this.api.getNoticeList().snapshotChanges()
-    //   .map(
-    //     changes => {
-    //       return changes.map(c => ({
-    //         key: c.payload['key'], ...c.payload.val()
-    //       }))
-    //     });
-    // console.log('ionViewDidLoad NewsPage');
+
+    this.api.getNoticeList().snapshotChanges().map(val => console.log(val.values));
+ 
   }
 
   see_new(){

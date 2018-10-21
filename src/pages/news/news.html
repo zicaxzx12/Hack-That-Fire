@@ -16,6 +16,7 @@
 <ion-content style="background-color: #2b3042;">
   
   <ion-list>
+
     <ion-item *ngFor="let note of notices | async" style="background-color: #a83939; color:rgb(240, 238, 238)">
       <ion-thumbnail item-start>
         <img src="assets/imgs/incendio.jpg">
@@ -24,21 +25,6 @@
       <p style="color: wheat">{{note.description}}</p>
       <button (click)="see_new()" ion-button clear item-end>View</button>
     </ion-item>
-    <ion-item style="background-color: #a83939; color:rgb(240, 238, 238)">
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/incendio.jpg">
-      </ion-thumbnail>
-      <h2>Tijuana</h2>
-      <p style="color: wheat">se esta incendiando la basura</p>
-      <button (click)="see_new()" ion-button clear item-end>View</button>
-    </ion-item>
-    <ion-item style="background-color: #a83939; color:rgb(240, 238, 238)">
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/incendio.jpg">
-      </ion-thumbnail>
-      <h2>Tijuana</h2>
-      <p style="color: wheat">se esta incendiando la basura</p>
-      <button (click)="see_new()" ion-button clear item-end>View</button>
-    </ion-item>
+    
   </ion-list>
 </ion-content>

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 declare var google: any;
 /*
@@ -12,10 +12,10 @@ declare var google: any;
 @Injectable()
 export class ApisProvider {
   apiurl = "http://api.openweathermap.org/data/2.5/weather?APPID=91133df127c96d761d618924474da2ac&q=";
-  // private noteListRef = this.db.list<any>('notices');
+  private noteListRef = this.db.list<any>('notices');
 
 // private db: AngularFireDatabase,
-  constructor( public http: HttpClient) {
+  constructor(private db: AngularFireDatabase, public http: HttpClient) {
     console.log('Hello ApisProvider Provider');
   }
 
@@ -31,21 +31,21 @@ export class ApisProvider {
     var map2 = new google.maps.Map(document.getElementById(id), mapOptions);
   }
 
-  // getNoticeList() {
-  //   return this.noteListRef;
-  // }
+  getNoticeList() {
+    return this.noteListRef;
+  }
 
-  // addNotice(data) {
-  //   return this.noteListRef.push(data);
-  // }
+  addNotice(data) {
+    return this.noteListRef.push(data);
+  }
 
-  // updateNotice(data) {
-  //   return this.noteListRef.update(data.key, data);
-  // }
+  updateNotice(data) {
+    return this.noteListRef.update(data.key, data);
+  }
 
-  // removeNotice(data) {
-  //   return this.noteListRef.remove(data.key);
-  // }
+  removeNotice(data) {
+    return this.noteListRef.remove(data.key);
+  }
 
   }
 
